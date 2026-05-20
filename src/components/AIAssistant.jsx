@@ -127,7 +127,7 @@ const AIAssistant = ({
             onChange={(e) => setAiPrompt(e.target.value)}
             placeholder="Ask AI anything..."
             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-12 text-white placeholder-gray-500 outline-none focus:border-primary-500/50 transition-all"
-            onKeyPress={(e) => e.key === 'Enter' && onAIChat()}
+            onKeyDown={(e) => e.key === 'Enter' && onAIChat()}
           />
           <button 
             onClick={onAIChat}

@@ -17,7 +17,7 @@ const ComposeModal = ({ onClose, onSend, loading }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       
-      <div className="relative bg-dark-900 border border-white/10 rounded-2xl shadow-premium max-w-lg w-full mx-4 overflow-hidden animate-fade-in">
+      <div className="relative bg-dark-900 border border-white/10 rounded-2xl shadow-xl max-w-lg w-full mx-4 overflow-hidden animate-fade-in">
         <div className="flex items-center justify-between p-5 border-b border-white/10">
           <h2 className="text-xl font-semibold text-white flex items-center gap-2">
             <span>✍️</span> Compose New Email

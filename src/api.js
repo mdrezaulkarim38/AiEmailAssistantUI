@@ -1,32 +1,30 @@
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'http://localhost:5089';
+
+async function request(url, body) {
+  const response = await fetch(`${API_BASE}${url}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`API ${response.status}: ${text.slice(0, 100)}`);
+  }
+  return response.json();
+}
 
 export const api = {
   async getReplySuggestions(incomingEmail, tone = 'formal') {
-    const response = await fetch(`${API_BASE}/reply-suggestion`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ incomingEmail, tone })
-    });
-    const data = await response.json();
+    const data = await request('/reply-suggestion', { incomingEmail, tone });
     return parseSuggestions(data.output);
   },
 
   async draftEmail(recipient, purpose, context, tone = 'formal') {
-    const response = await fetch(`${API_BASE}/draft`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ recipient, purpose, context, tone })
-    });
-    return response.json();
+    return request('/draft', { recipient, purpose, context, tone });
   },
 
   async changeTone(emailText, targetTone) {
-    const response = await fetch(`${API_BASE}/tone`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ emailText, targetTone })
-    });
-    const data = await response.json();
+    const data = await request('/tone', { emailText, targetTone });
     return data.output;
   }
 };
